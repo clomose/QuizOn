@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react'
-import { MultipleChoiceQuestions, IntegerTypeQuestions } from '../../components/Questions'
+import { MultipleChoiceQuestions, IntegerTypeQuestions } from '../../utils/Questions'
 
 const Quiz = () => {
   const [questions, setQuestions] = useState(MultipleChoiceQuestions)
@@ -8,6 +8,7 @@ const Quiz = () => {
   const [userAnswer, setUserAnswer] = useState('')
   const [isAnswered, setIsAnswered] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [score, setScore] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,12 +37,17 @@ const Quiz = () => {
       setIsAnswered(false)
       setIsSubmitted(false)
       setTime(30)
+    }else{
+      setCurrentQuestion(prev => prev + 1)
     }
   }
 
   const handleAnswer = (option) => {
     if (!isAnswered) {
       setUserAnswer(option)
+      if(option===questions[currentQuestion].answer){
+        setScore(prevScore => prevScore + 1)
+      }
       setIsAnswered(true)
       setTimeout(handleNextQuestion, 1500)
     }
@@ -56,10 +62,11 @@ const Quiz = () => {
 
   if (currentQuestion >= questions.length) {
     return (
-      <div className='min-h-screen bg-gradient-to-b from-indigo-500 to-purple-600 flex justify-center items-center p-4'>
+      <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 '>
         <div className='bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center space-y-4'>
           <h2 className='text-3xl font-bold text-gray-800'>Quiz Completed! 🎉</h2>
           <p className='text-gray-600'>Thank you for participating!</p>
+          <p className='text-purple-600 text-xl font-semibold '>Your score is {score} out of {MultipleChoiceQuestions.length+IntegerTypeQuestions.length}</p>
         </div>
       </div>
     )
@@ -115,7 +122,12 @@ const Quiz = () => {
                     type='text' 
                     id='answer' 
                     value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
+                    onChange={(e) => {
+                      setUserAnswer(e.target.value);
+                      if(e.target.value===questions[currentQuestion].answer.toString()){
+                        setScore(prevScore => prevScore + 1)
+                      }
+                    }}
                     className='w-full border-2 border-purple-500 rounded-xl p-4 text-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300'
                     disabled={isAnswered}
                     placeholder='Enter your answer...'
