@@ -1,13 +1,15 @@
 import React from 'react'
-import quiz1 from '../../assets/quiz1.jpg'
+import { useNavigate } from 'react-router-dom'
 import Quiz from '../../assets/Quiz.jpg'
 import Work from './Work'
+import { clearQuizAttempts } from '../../utils/indexDB'
 import { motion } from 'framer-motion'
 import { FaBrain, FaCheckCircle, FaClock, FaChartLine, FaRedo } from 'react-icons/fa'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
 const Home = () => {
+    const navigate = useNavigate()
     const features = [
         {
             title: 'Engaging Questions',
@@ -30,6 +32,16 @@ const Home = () => {
             icon: <FaRedo className="text-3xl text-indigo-500" />
         },
     ]
+
+    const handleStartQuiz = () => {
+        clearQuizAttempts().then(() => {
+            navigate('/quiz')
+        })
+    }
+
+    const handleViewHistory = () => {
+        navigate('/history')
+    }
     
     return (
         <>
@@ -59,7 +71,7 @@ const Home = () => {
                                     key={index} 
                                     className='flex items-center gap-3 p-3 rounded-xl hover:bg-white hover:shadow-lg 
                                         transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-102 
-                                        border border-transparent hover:border-gray-100 hover:border-2 hover:border-purple-500'
+                                        border border-transparent hover:border-purple-500'
                                 >
                                     <div className='flex-shrink-0 bg-gray-50 p-3 rounded-lg'>
                                         {feature.icon}
@@ -89,12 +101,12 @@ const Home = () => {
                             relative mt-10' 
                     />
                     <div className='flex justify-between mt-6 gap-4'>
-                        <button className='flex-1 bg-gradient-to-r from-purple-600 to-pink-600 
+                        <button onClick={handleStartQuiz} className='flex-1 bg-gradient-to-r from-purple-600 to-pink-600 
                             text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all 
                             duration-300 ease-in-out transform hover:scale-105 cursor-pointer text-lg font-semibold'>
                             Start Quiz Now
                         </button>
-                        <button className='flex-1 bg-white border-2 border-purple-600 
+                        <button onClick={handleViewHistory} className='flex-1 bg-white border-2 border-purple-600 
                             text-purple-600 px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all 
                             duration-300 ease-in-out transform hover:scale-105 cursor-pointer text-lg font-semibold'>
                             View History

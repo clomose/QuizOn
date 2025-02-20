@@ -3,7 +3,7 @@ import { MultipleChoiceQuestions, IntegerTypeQuestions } from '../../utils/Quest
 import { saveQuizAttempt } from '../../utils/indexDB'
 
 const Quiz = () => {
-  const [questions, setQuestions] = useState(IntegerTypeQuestions)
+  const [questions, setQuestions] = useState(MultipleChoiceQuestions)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [time, setTime] = useState(30)
   const [userAnswer, setUserAnswer] = useState('')
