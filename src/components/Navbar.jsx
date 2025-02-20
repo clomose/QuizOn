@@ -66,7 +66,13 @@ const NavLink = ({ title, icon }) => (
 );
 
 const MobileNavLink = ({ title, icon }) => (
-    <Link to={title === 'Take Quiz' ? '/quiz' : title === 'History' ? '/history' : '/'} className="flex items-center space-x-2 font-semibold px-3 py-2 rounded-md text-violet-600 hover:bg-purple-50 hover:text-purple-800 transition-colors duration-200">
+    <Link to={title === 'Take Quiz' ? '/quiz' : title === 'History' ? '/history' : '/'} className="flex items-center space-x-2 font-semibold px-3 py-2 rounded-md text-violet-600 hover:bg-purple-50 hover:text-purple-800 transition-colors duration-200"
+    onClick={() => {
+        if(title === 'Take Quiz'){
+            clearQuizAttempts()
+        }
+    }}
+    >
         {icon}
         <span>{title}</span>
     </Link>
