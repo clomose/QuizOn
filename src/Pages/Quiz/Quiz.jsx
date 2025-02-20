@@ -1,8 +1,9 @@
 import React, { useState , useEffect} from 'react'
 import { MultipleChoiceQuestions, IntegerTypeQuestions } from '../../utils/Questions'
+import { saveQuizAttempt } from '../../utils/indexDB'
 
 const Quiz = () => {
-  const [questions, setQuestions] = useState(MultipleChoiceQuestions)
+  const [questions, setQuestions] = useState(IntegerTypeQuestions)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [time, setTime] = useState(30)
   const [userAnswer, setUserAnswer] = useState('')
@@ -45,7 +46,19 @@ const Quiz = () => {
   const handleAnswer = (option) => {
     if (!isAnswered) {
       setUserAnswer(option)
-      if(option===questions[currentQuestion].answer){
+      const quizAttempt = {
+        question: questions[currentQuestion].question,
+        answer: option,
+        correctAnswer: questions[currentQuestion].answer,
+        options : questions[currentQuestion].options,
+        type : (questions === MultipleChoiceQuestions) ? 'Multiple Choice' : 'Integer Type',
+        isCorrect: option.toString()===questions[currentQuestion].answer.toString(),
+        score : (option.toString()===questions[currentQuestion].answer.toString()) ? 1 : 0
+      }
+
+      saveQuizAttempt(quizAttempt);
+
+      if(option.toString()===questions[currentQuestion].answer.toString()){
         setScore(prevScore => prevScore + 1)
       }
       setIsAnswered(true)
@@ -53,14 +66,8 @@ const Quiz = () => {
     }
   }
 
-  const handleSubmitAnswer = () => {
-    setIsSubmitted(true)
-    setTimeout(() => {
-      handleNextQuestion()
-    }, 1500)
-  }
-
   if (currentQuestion >= questions.length) {
+
     return (
       <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 '>
         <div className='bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center space-y-4'>
@@ -113,7 +120,7 @@ const Quiz = () => {
                 ))}
               </div>
             ) : (
-              <form onSubmit={handleSubmitAnswer} className='space-y-6 mt-6'>
+              <form className='space-y-6 mt-6'>
                 <div className='space-y-3'>
                   <label htmlFor='answer' className='block text-lg font-medium text-gray-700'>
                     Your Answer
@@ -124,9 +131,6 @@ const Quiz = () => {
                     value={userAnswer}
                     onChange={(e) => {
                       setUserAnswer(e.target.value);
-                      if(e.target.value===questions[currentQuestion].answer.toString()){
-                        setScore(prevScore => prevScore + 1)
-                      }
                     }}
                     className='w-full border-2 border-purple-500 rounded-xl p-4 text-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300'
                     disabled={isAnswered}
@@ -138,6 +142,10 @@ const Quiz = () => {
                     type='submit'
                     className='w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl text-lg font-semibold
                       hover:shadow-lg transform hover:scale-102 transition-all duration-300'
+                    onClick={() => {
+                      handleAnswer(userAnswer)
+                      setIsSubmitted(true)
+                    }}
                   >
                     Submit Answer
                   </button>
