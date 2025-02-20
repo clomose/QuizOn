@@ -81,7 +81,7 @@ const Quiz = () => {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 md:p-8'>
-      <div className='container max-w-3xl mx-auto'>
+      <div className='container max-w-3xl mx-auto sm:p-10 xs:p-4'>
         <div className='bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/20'>
           <div className='space-y-6'>
             <div className='flex flex-col md:flex-row justify-between items-center gap-4'>

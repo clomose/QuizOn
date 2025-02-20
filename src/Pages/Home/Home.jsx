@@ -45,7 +45,6 @@ const Home = () => {
     
     return (
         <>
-            <Navbar />
             <div className='w-full min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-20 p-4 md:p-8 lg:p-10'>
                 <div className='w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'>
                     <motion.div 

@@ -50,7 +50,7 @@ const History = () => {
 
     return (
         <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 md:p-8 sm:p-4'>
-            <div className='container max-w-3xl mx-auto sm:p-4'>
+            <div className='container max-w-3xl mx-auto sm:p-16'>
                 <div className='bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/20'>
                     <div className='space-y-6'>
                         <div className='flex justify-between items-center'>

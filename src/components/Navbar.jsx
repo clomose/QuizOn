@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom'
-import { FaQuestionCircle, FaHistory, FaUser, FaBars, FaTimes } from 'react-icons/fa';
+import { FaQuestionCircle, FaHistory, FaHome, FaBars, FaTimes } from 'react-icons/fa';
 import { clearQuizAttempts } from '../utils/indexDB';
 
 const Navbar = () => {
@@ -19,6 +19,7 @@ const Navbar = () => {
                     
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center space-x-4">
+                        <NavLink title="Home" icon={<FaHome />} />  
                         <NavLink title="Take Quiz" icon={<FaQuestionCircle />} />
                         <NavLink title="History" icon={<FaHistory />} />
                     </div>
@@ -39,9 +40,10 @@ const Navbar = () => {
                         className="md:hidden"
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg">
+                            <MobileNavLink title="Home" icon={<FaHome />} />
                             <MobileNavLink title="Take Quiz" icon={<FaQuestionCircle />} />
                             <MobileNavLink title="History" icon={<FaHistory />} />
-                            <MobileNavLink title="Profile" icon={<FaUser />} />
+
                         </div>
                     </motion.div>
                 )}
@@ -51,7 +53,7 @@ const Navbar = () => {
 };
 
 const NavLink = ({ title, icon }) => (
-    <Link to={title === 'Take Quiz' ? '/quiz' : '/history'} className="flex items-center font-semibold space-x-1 text-violet-600 hover:text-purple-800 transition-colors duration-200 hover:cursor-pointer"
+    <Link to={title === 'Take Quiz' ? '/quiz' : title === 'History' ? '/history' : '/'} className="flex items-center font-semibold space-x-1 text-violet-600 hover:text-purple-800 transition-colors duration-200 hover:cursor-pointer"
     onClick={() => {
         if(title === 'Take Quiz'){
             clearQuizAttempts()

@@ -43,7 +43,7 @@ const Work = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-white/80 border-2 border-transparent p-8 rounded-2xl shadow-xl text-center border border-transparent hover:border-purple-500/20 transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105"
+              className="group bg-white/80 border-2 border-transparent p-8 rounded-2xl shadow-xl text-center hover:border-purple-500/20 transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105"
             >
               <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">{step.icon}</div>
               <h2 className="text-xl font-semibold mb-3 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300 ease-in-out">
