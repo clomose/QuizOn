@@ -2,7 +2,6 @@
 
 QuizOn is a modern, interactive quiz application built with React and Vite that offers an engaging learning experience through multiple-choice and integer-type questions.
 
-![QuizOn Screenshot](src/assets/Quiz.jpg)
 
 ## ✨ Features
 
