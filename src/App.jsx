@@ -6,8 +6,6 @@ import Quiz from './Pages/Quiz/Quiz'
 import PageLayout from './Pages/Home/PageLayout'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Routes>

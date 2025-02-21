@@ -2,15 +2,18 @@ import React, { useState , useEffect} from 'react'
 import { MultipleChoiceQuestions, IntegerTypeQuestions } from '../../utils/Questions'
 import { saveQuizAttempt } from '../../utils/indexDB'
 
+// Quiz component handling both multiple choice and integer type questions
 const Quiz = () => {
+  // State management for quiz functionality
   const [questions, setQuestions] = useState(MultipleChoiceQuestions)
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [time, setTime] = useState(30)
+  const [time, setTime] = useState(30)  // Timer for each question (30 seconds)
   const [userAnswer, setUserAnswer] = useState('')
   const [isAnswered, setIsAnswered] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [score, setScore] = useState(0)
 
+  // Timer effect that counts down and moves to next question
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((prevTime) => {
@@ -24,6 +27,7 @@ const Quiz = () => {
     return () => clearInterval(interval)
   }, [])
 
+  // Handles progression to next question or quiz section
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(prev => prev + 1)
@@ -43,6 +47,7 @@ const Quiz = () => {
     }
   }
 
+  // Processes user's answer and updates score
   const handleAnswer = (option) => {
     if (!isAnswered) {
       setUserAnswer(option)
@@ -66,6 +71,7 @@ const Quiz = () => {
     }
   }
 
+  // Quiz completion screen
   if (currentQuestion >= questions.length) {
 
     return (
@@ -80,6 +86,7 @@ const Quiz = () => {
   }
 
   return (
+    // Main quiz interface with responsive design
     <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 md:p-8'>
       <div className='container max-w-3xl mx-auto sm:p-10 xs:p-4'>
         <div className='bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/20'>

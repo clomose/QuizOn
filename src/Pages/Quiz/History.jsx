@@ -1,11 +1,15 @@
 import React ,{useState,useEffect}from 'react'
 import { getQuizAttempts } from '../../utils/indexDB'
 import Loader from '../../components/Loader'
+
+// History component to display previous quiz attempts
 const History = () => {
+    // State management for quiz history
     const [quizAttempts, setQuizAttempts] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fetch quiz attempts from IndexedDB on component mount
     useEffect(() => {
         try{
             getQuizAttempts().then((data) => {
@@ -20,6 +24,7 @@ const History = () => {
         }
     }, []);
 
+    // Navigation handlers for viewing different attempts
     const handleNextQuestion = () => {
         if (currentIndex < quizAttempts.length - 1) {
             setCurrentIndex(prev => prev + 1);
@@ -32,6 +37,7 @@ const History = () => {
         }
     }
 
+    // Conditional renders for empty state and loading
     if(quizAttempts.length === 0){
         return (
             <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 md:p-8'>
@@ -49,6 +55,7 @@ const History = () => {
     }
 
     return (
+        // History viewer interface with navigation controls
         <div className='min-h-screen bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex justify-center items-center p-4 md:p-8 sm:p-4'>
             <div className='container max-w-3xl mx-auto sm:p-16'>
                 <div className='bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/20'>

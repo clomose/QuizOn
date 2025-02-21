@@ -1,8 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion' // You'll need to install framer-motion if not already installed
 
+// Component explaining how the quiz application works
 const Work = () => {
+  // Step-by-step guide configuration
   const steps = [
+    // Each step contains a title, description, and icon
     {
       title: "Pick a Quiz",
       description: "Choose from a variety of categories.",
@@ -26,7 +29,9 @@ const Work = () => {
   ]
 
   return (
+    // Section with gradient background and floating orbs effect
     <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50 relative overflow-hidden">
+      {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-20 left-20 w-72 h-72 bg-purple-200 rounded-full filter blur-[100px] opacity-30"></div>
         <div className="absolute bottom-20 right-20 w-72 h-72 bg-pink-200 rounded-full filter blur-[100px] opacity-30"></div>
@@ -36,6 +41,7 @@ const Work = () => {
           How It Works
         </h2>
         
+        {/* Grid layout for steps with animation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <motion.div
